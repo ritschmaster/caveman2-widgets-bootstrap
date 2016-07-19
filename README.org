@@ -1,0 +1,109 @@
+* Caveman2-Widgets-Bootstrap 
+This is an extension to [[https://github.com/ritschmaster/caveman2-widgets][caveman2-widgets]]. It supplies widgets which are using [[https://getbootstrap.com/][Bootstrap]].
+** Installation
+The Quicklisp request is pending!
+
+Until then you can clone this repository into
+"~/quicklisp/local-projects" or (if you are using [[https://github.com/roswell/roswell][Roswell]])
+"~/.roswell/local-projects" to QUICKLOAD it:
+#+BEGIN_SRC lisp
+(ql:quickload :caveman2-widgets)
+#+END_SRC
+
+** Usage
+*** A new header widget
+A new header widget is added which uses specific CDN links for getting
+Bootstrap. Please notice, that the global variables, where you can
+specify the locations, are not simple string variables! They are
+<FILE> objects.
+- *BOOTSTRAP-JS* :: Must be a <JS-FILE> object.
+- *BOOTSTRAP-CSS* :: Must be a <CSS-FILE> object.
+
+*** Navigation widget
+The navigation widget is fully redesigned for the use with
+Bootstrap. You can use it fairly easy by just using
+<BOOTSTRAP-MENU-NAVIGATION-WIDGET> as KIND for the DEFNAV macro.
+
+An example:
+#+BEGIN_SRC lisp
+(defvar *first-widget*
+  (make-widget :global '<string-widget>
+               :text "<h1>Hello world from first</h1>"))
+
+(defvar *second-widget*
+  (make-widget :global '<string-widget>
+               :text "<h1>Hello world from second</h1>"))
+
+(defclass <proxy-widget> (<widget>)
+  ()
+  (:documentation "This class enables session based widgets for a
+navigation."))
+
+(defmethod render-widget ((this <proxy-widget>))
+  (set-widget-for-session :string-widget
+                          (make-widget :session '<string-widget>
+                                       :text "hello world"))
+  (render-widget (get-widget-for-session :string-widget)))
+
+(defnav "/"
+    ((make-instance '<bootstrap-header-widget>
+                    :title "Navigation test")
+     (list
+      (list "First widget" "first" *first-widget*)
+      (list "Second widget" "second" *second-widget*)
+      (list "Third widget" "third" (make-widget :global
+                                                '<proxy-widget>)))
+     :kind '<bootstrap-menu-navigation-widget>))
+#+END_SRC
+
+If you need extra header objects, you can create them via the
+RENDER-WIDGET-HEADER method. This means you only have to overwrite it
+for your own navigation class.
+
+#+BEGIN_SRC lisp
+(defvar *first-widget*
+  (make-widget :global '<string-widget>
+               :text "<h1>Hello world from first</h1>"))
+
+(defvar *second-widget*
+  (make-widget :global '<string-widget>
+               :text "<h1>Hello world from second</h1>"))
+
+(defclass <my-bootstrap-nav> (<bootstrap-menu-navigation-widget>)
+  ())
+
+(defmethod caveman2-widgets-bootstrap.navigation::render-widget-header
+    ((this <my-bootstrap-nav>)
+     (args (eql :right)))
+  (with-output-to-string (ret-val)
+    (format ret-val "<ul class=\"nav navbar-nav navbar-right\">
+  <li><a href=\"~a\">GitHub</a></li>
+</ul>"
+            (let ((link (make-widget
+                         :global '<link-widget>
+                         :label "GitHub"
+                         :callback #'(lambda ()
+                                       "http://github.com/ritschmaster")
+                         :target-foreign-p t)))
+              (uri-path link)))))
+
+(defnav "/"
+    ((make-instance '<bootstrap-header-widget>
+                    :title "Navigation test")
+     (list
+      (list "First widget" "first" *first-widget*)
+      (list "Second widget" "second" *second-widget*))
+     :kind '<my-bootstrap-nav>))
+#+END_SRC
+
+** Author
+
++ Richard Paul Bäck (richard.baeck@free-your-pc.com)
+
+** Copyright
+
+Copyright (c) 2016 Richard Paul Bäck (richard.baeck@free-your-pc.com)
+
+** License
+
+Licensed under the LLGPL License.
