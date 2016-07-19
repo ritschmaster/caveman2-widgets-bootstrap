@@ -19,7 +19,11 @@
     :initarg :brand-text
     :initform ""
     :accessor brand-text
-    :documentation "This can be HTML too.")))
+    :documentation "This can be HTML too.")
+   (navbar-fixed
+    :initarg :navbar-fixed
+    :initform nil
+    :accessor navbar-fixed)))
 
 (defgeneric render-widget-header (this args))
 (defmethod render-widget-header ((this <bootstrap-menu-navigation-widget>)
@@ -57,8 +61,11 @@
 
 (defmethod render-widget ((this <bootstrap-menu-navigation-widget>))
   (with-output-to-string (ret-val)
-    (format ret-val "<nav class=\"navbar navbar-default\">
-    <div class=\"container-fluid\">")
+    (format ret-val "<nav class=\"navbar navbar-default~a>
+<div class=\"container-fluid\">"
+            (if (navbar-fixed this)
+                " navbar-static-top\" style=\"position:fixed;width:100%\""
+                "\""))
     (format ret-val "<div class=\"navbar-header\">
   <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">
     <span class=\"sr-only\">Toggle navigation</span>
@@ -69,7 +76,7 @@
             (brand-text this))
     (when (brand-text this)
       (format ret-val
-              "<a class=\"navbar-brand\" href=\"#\">~a</a>"
+              "<div class=\"navbar-brand\">~a</div>"
               (brand-text this)))
     (format ret-val "</div>
 <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">")

@@ -60,6 +60,10 @@ If you need extra header objects, you can create them via the
 RENDER-WIDGET-HEADER method. This means you only have to overwrite it
 for your own navigation class.
 
+You have specific slots for you Bootstrap navigation bar at hand:
+- BRAND-TEXT :: Text/HTML that should be displayed in the brand section
+- NAVBAR-FIXED :: If non-nil then the navigation bar is fixed.
+
 #+BEGIN_SRC lisp
 (defvar *first-widget*
   (make-widget :global '<string-widget>
@@ -70,7 +74,10 @@ for your own navigation class.
                :text "<h1>Hello world from second</h1>"))
 
 (defclass <my-bootstrap-nav> (<bootstrap-menu-navigation-widget>)
-  ())
+  ()
+  (:default-initargs
+   :brand-text "<div id=\"brandlogo\"></div>"
+    :navbar-fixed t))
 
 (defmethod caveman2-widgets-bootstrap.navigation::render-widget-header
     ((this <my-bootstrap-nav>)
