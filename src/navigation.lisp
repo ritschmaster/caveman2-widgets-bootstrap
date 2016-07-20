@@ -31,7 +31,11 @@
   (with-output-to-string (ret-val)
     (format ret-val "<ul class=\"nav navbar-nav navigation-widget-links\">")
     (dolist (page (caveman2-widgets.navigation::pages this))
-      (format ret-val "<li><a href=\"~a\">~a</a></li>"
+      ;; <a style=\"position:absolute;overflow:hidden;top:-20px;left:-20px\" href=\"~a\"></a>
+      (format ret-val "<li>
+<a href=\"~a\">~a</a>
+<input type=\"hidden\" value=\"~a\" />
+</li>"
               (let ((link (make-widget
                            :session '<link-widget>
                            :label (first page)
@@ -48,7 +52,9 @@
                                                       (second page))))))
                 (concatenate 'string
                              (uri-path link)))
-              (first page)))
+              (funcall caveman2-widgets.util::+translate+
+                       (first page))
+              (second page)))
     (format ret-val "</ul>")))
 
 (defmethod render-widget-header ((this <bootstrap-menu-navigation-widget>)

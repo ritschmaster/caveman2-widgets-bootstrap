@@ -8,7 +8,8 @@
 (in-package :cl-user)
 (defpackage caveman2-widgets-bootstrap.document
   (:use :cl
-        :caveman2-widgets)
+        :caveman2-widgets
+        :caveman2-widgets-bootstrap.widget)
   (:export
    :*bootstrap-js*
    :*bootstrap-css*
@@ -34,4 +35,10 @@
   (append-item this
                *bootstrap-js*)
   (append-item this
-               *bootstrap-css*))
+               *bootstrap-css*)
+  (append-item this
+               (make-instance '<js-file>
+                              :path (concatenate 'string
+                                                 caveman2-widgets::*javascript-path*
+                                                 "/"
+                                                 *widgets-js-filename*))))

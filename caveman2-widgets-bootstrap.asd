@@ -13,14 +13,16 @@
 (in-package :caveman2-widgets-bootstrap-asd)
 
 (defsystem caveman2-widgets-bootstrap
-  :version "0.1"
+  :version "0.2"
   :author "Richard Paul Bäck"
   :license "LLGPL"
   :depends-on (:caveman2-widgets)
   :serial t
   :components ((:module "src"
                         :components
-                        ((:file "document")
+                        ((:file "widget")
+                         (:file "callback-widgets")
+                         (:file "document")
                          (:file "navigation")
                          (:file "caveman2-widgets-bootstrap"))))
   :description ""
