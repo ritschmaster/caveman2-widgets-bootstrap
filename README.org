@@ -10,6 +10,19 @@ Until then you can clone this repository into
 (ql:quickload :caveman2-widgets)
 #+END_SRC
 
+** Contributions
+You are very welcomed to contribute to this project! You can contribute by:
+- Using it and spreading the word!
+- Finding flaws and submitting [[https://github.com/ritschmaster/caveman2-widgets/issues][Issues]].
+- Finding flaws and removing them (as [[https://github.com/ritschmaster/caveman2-widgets/pulls][Pull-requests]]).
+- Adding new features (as [[https://github.com/ritschmaster/caveman2-widgets/pulls][Pull-requests]]). Before shooting in the dark
+  create either an [[https://github.com/ritschmaster/caveman2-widgets/issues][Issues]] or mail me. Maybe your feature is on my
+  agenda too.
+- Showing your appreciation through a donation (please mail me for my
+  data).
+
+If you add new features, please document them. Otherwise other
+developers will have a hard time using this framework.
 ** Usage
 *** A new header widget
 A new header widget is added which uses specific CDN links for getting

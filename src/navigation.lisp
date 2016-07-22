@@ -31,7 +31,6 @@
   (with-output-to-string (ret-val)
     (format ret-val "<ul class=\"nav navbar-nav navigation-widget-links\">")
     (dolist (page (caveman2-widgets.navigation::pages this))
-      ;; <a style=\"position:absolute;overflow:hidden;top:-20px;left:-20px\" href=\"~a\"></a>
       (format ret-val "<li>
 <a href=\"~a\">~a</a>
 <input type=\"hidden\" value=\"~a\" />
@@ -39,7 +38,7 @@
               (let ((link (make-widget
                            :session '<link-widget>
                            :label (first page)
-                           :callback #'(lambda ()
+                           :callback #'(lambda (args)
                                          (setf (current-page this) (second page))
                                          (concatenate 'string
                                                       (subseq

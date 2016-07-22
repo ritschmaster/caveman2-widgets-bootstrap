@@ -25,7 +25,7 @@
                          (:file "document")
                          (:file "navigation")
                          (:file "caveman2-widgets-bootstrap"))))
-  :description ""
+  :description "An extension to caveman2-widgets which enables the simple usage of Twitter Bootstrap."
   :long-description
   #.(with-open-file (stream (merge-pathnames
                              #p"README.markdown"
