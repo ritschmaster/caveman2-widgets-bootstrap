@@ -25,7 +25,10 @@
    :<bootstrap-header-widget>
 
    ;; From :caveman2-widgets-bootstrap.navigation
-   :<bootstrap-menu-navigation-widget>))
+   :<bootstrap-menu-navigation-widget>
+   :render-widget-header
+   :brand-text
+   :navbar-fixed))
 (in-package :caveman2-widgets-bootstrap)
 
 (setf *init-widgets-hooks*

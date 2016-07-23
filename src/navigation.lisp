@@ -12,7 +12,9 @@
         :caveman2-widgets)
   (:export
    :<bootstrap-menu-navigation-widget>
-   :brand-text))
+   :render-widget-header
+   :brand-text
+   :navbar-fixed))
 (in-package :caveman2-widgets-bootstrap.navigation)
 
 (defclass <bootstrap-menu-navigation-widget> (<menu-navigation-widget>)
