@@ -16,7 +16,8 @@
   :version "0.2"
   :author "Richard Paul Bäck"
   :license "LLGPL"
-  :depends-on (:caveman2-widgets)
+  :depends-on (:caveman2
+               :caveman2-widgets)
   :serial t
   :components ((:module "src"
                         :components

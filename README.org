@@ -34,10 +34,21 @@ specify the locations, are not simple string variables! They are
 
 *** Navigation widget
 The navigation widget is fully redesigned for the use with
-Bootstrap. You can use it fairly easy by just using
-<BOOTSTRAP-MENU-NAVIGATION-WIDGET> as KIND for the DEFNAV macro.
+Bootstrap. The <BOOTSTRAP-MENU-NAVIGATION-WIDGET> has some special
+slots:
+- BRAND-TEXT :: A HTML code which will be displayed in the upper left
+                corner.
+- NAVBAR-FIXED :: A non-nil value will fix the navbar on the upper
+                  edge.
+- LOGIN :: If NIL, don't display a login. If non-nil, the value has to
+           be a cons. The cons must consist of two values. The first
+           is the keyword with which the login widget can be accessed
+           in the session The second is a symbol which is the name of
+           the class used to create the login widget. Example:
+           (list :login-widget '<LOGIN-WIDGET>)
 
-An example:
+You can use it fairly easy by just using
+<BOOTSTRAP-MENU-NAVIGATION-WIDGET> as KIND for the DEFNAV macro:
 #+BEGIN_SRC lisp
 (defvar *first-widget*
   (make-widget :global '<string-widget>
