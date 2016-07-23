@@ -40,12 +40,6 @@ slots:
                 corner.
 - NAVBAR-FIXED :: A non-nil value will fix the navbar on the upper
                   edge.
-- LOGIN :: If NIL, don't display a login. If non-nil, the value has to
-           be a cons. The cons must consist of two values. The first
-           is the keyword with which the login widget can be accessed
-           in the session The second is a symbol which is the name of
-           the class used to create the login widget. Example:
-           (list :login-widget '<LOGIN-WIDGET>)
 
 You can use it fairly easy by just using
 <BOOTSTRAP-MENU-NAVIGATION-WIDGET> as KIND for the DEFNAV macro:
@@ -83,10 +77,6 @@ navigation."))
 If you need extra header objects, you can create them via the
 RENDER-WIDGET-HEADER method. This means you only have to overwrite it
 for your own navigation class.
-
-You have specific slots for you Bootstrap navigation bar at hand:
-- BRAND-TEXT :: Text/HTML that should be displayed in the brand section
-- NAVBAR-FIXED :: If non-nil then the navigation bar is fixed.
 
 #+BEGIN_SRC lisp
 (defvar *first-widget*

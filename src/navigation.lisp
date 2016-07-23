@@ -24,25 +24,7 @@
    (navbar-fixed
     :initarg :navbar-fixed
     :initform nil
-    :accessor navbar-fixed)
-   (login
-    :initarg :login
-    :initform nil
-    :accessor login
-    :documentation "If NIL then the login will not be display. If
-non-nil, the value has to be a cons. The cons must consist of three
-values. The first is the keyword with which the login widget can be
-accessed in the session The second is a symbol which is the name of
-the class used to create the login widget. The third is an
-authenticator function which will be used by the
-<LOGIN-WIDGET>. Example:
-(list
- :login-widget
- '<LOGIN-WIDGET>
- #'(lambda (a b) nil))
-
-So You don't have to make a <LOGIN-WIDGET> object by your own this
-navigation does that for you!")))
+    :accessor navbar-fixed)))
 
 (defgeneric render-widget-header (this args))
 (defmethod render-widget-header ((this <bootstrap-menu-navigation-widget>)
@@ -82,47 +64,9 @@ navigation does that for you!")))
 
 (defmethod render-widget-header ((this <bootstrap-menu-navigation-widget>)
                                  (args (eql :right)))
-  (with-output-to-string (ret-val)
-    (format ret-val "<ul class=\"nav navbar-nav navbar-right\">
-<li>")
-    (cond
-      ((and
-        (login this) ;; login widget present
-        (logged-in *session*))
-       (format ret-val
-               (render-widget
-                (logout-button
-                 (get-widget-for-session
-                  (first (login this)))))))
-      ((and
-        (login this)  ;; login widget present
-        (not (logged-in *session*))
-        )
-       (format
-        ret-val
-        (render-widget
-         (make-widget
-          :global '<button-widget>
-          :label "Login"
-          :callback
-          #'(lambda (args)
-              ;; (setf (widgets (composite this))
-              ;;       (list
-              ;;        (get-widget-for-session
-              ;;         (first (login this)))))
-              (mark-dirty this))))))
-      (t ;; no login widget present
-       (format ret-val "")))
-    (format ret-val "</li>
-</ul>")))
+  "")
 
 (defmethod render-widget ((this <bootstrap-menu-navigation-widget>))
-  (when (login this) ;; create the login-widget
-    (set-widget-for-session (first (login this))
-                            (make-widget :session
-                                         (second (login this))
-                                         :authenticator
-                                         (third (login this)))))
   (with-output-to-string (ret-val)
     (format ret-val "<nav class=\"navbar navbar-default~a>
 <div class=\"container-fluid\">"
