@@ -29,7 +29,12 @@
                  :crossorigin "anonymous"))
 
 (defclass <bootstrap-header-widget> (<header-widget>)
-  ())
+  ()
+  (:default-initargs
+   :other-header-content
+      (list
+       "<meta name=\"viewport\"
+ content=\"width=device-width, initial-scale=1\">")))
 
 (defmethod initialize-instance :after ((this <bootstrap-header-widget>) &key)
   (append-item this
