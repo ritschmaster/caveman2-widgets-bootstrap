@@ -9,7 +9,8 @@
 (defpackage caveman2-widgets-bootstrap.navigation
   (:use :cl
         :caveman2
-        :caveman2-widgets)
+        :caveman2-widgets
+        :caveman2-widgets.util)
   (:export
    :<bootstrap-menu-navigation-widget>
    :render-widget-header
@@ -39,20 +40,22 @@
 <a href=\"~a\">~a</a>
 <input type=\"hidden\" value=\"~a\" />
 </li>"
-                (let ((link (make-widget
-                             :session '<link-widget>
-                             :label (first page)
-                             :callback #'(lambda (args)
-                                           (setf (current-page this) (second page))
-                                           (concatenate 'string
-                                                        (subseq
-                                                         (base-path this) 1)
-                                                        (if (= (length
-                                                                (base-path this))
-                                                               1)
-                                                            ""
-                                                            "/")
-                                                        (second page))))))
+                (let ((link
+                       (make-widget
+                        :session '<link-widget>
+                        :label (first page)
+                        :callback
+                        #'(lambda (args)
+                            (setf (current-page this) (second page))
+                            (concatenate
+                             'string
+                             (subseq
+                              (base-path this) 1)
+                             (if (has-trailing-slash
+                                  (base-path this))
+                                 ""
+                                 "/")
+                             (second page))))))
                   (concatenate 'string
                                (uri-path link)))
                 (funcall caveman2-widgets.util::+translate+
