@@ -1,13 +1,13 @@
 * Caveman2-Widgets-Bootstrap 
 This is an extension to [[https://github.com/ritschmaster/caveman2-widgets][caveman2-widgets]]. It supplies widgets which are using [[https://getbootstrap.com/][Bootstrap]].
 ** Installation
-The Quicklisp request is pending!
+You can load it through Quicklisp or you can use the git repository. To use the
+git repository clone it into "~/quicklisp/local-projects" or (if you are using
+[[https://github.com/roswell/roswell][Roswell]]) "~/.roswell/local-projects".
 
-Until then you can clone this repository into
-"~/quicklisp/local-projects" or (if you are using [[https://github.com/roswell/roswell][Roswell]])
-"~/.roswell/local-projects" to QUICKLOAD it:
+To QUICKLOAD it, use:
 #+BEGIN_SRC lisp
-(ql:quickload :caveman2-widgets)
+(ql:quickload :caveman2-widgets-bootstrap)
 #+END_SRC
 
 ** Contributions
