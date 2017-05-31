@@ -1,5 +1,8 @@
 * Caveman2-Widgets-Bootstrap 
-This is an extension to [[https://github.com/ritschmaster/caveman2-widgets][caveman2-widgets]]. It supplies widgets which are using [[https://getbootstrap.com/][Bootstrap]].
+This is an extension to [[https://github.com/ritschmaster/caveman2-widgets][caveman2-widgets]]. It supplies widgets which are using
+[[https://getbootstrap.com/][Bootstrap]]. Before you start using it you may have a look at the [[https://github.com/ritschmaster/caveman2-widgets#usage][basic usage
+documentation]] to understand how to use those (extra) widgets.
+
 ** Installation
 You can load it through Quicklisp or you can use the git repository. To use the
 git repository clone it into "~/quicklisp/local-projects" or (if you are using
